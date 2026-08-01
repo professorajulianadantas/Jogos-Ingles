@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Present Perfect Challenge | Teacher Juliana</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700;800&display=swap');
+
+  :root {
+    --cream: #FDF6EC;
+    --cream-dark: #F3E5D0;
+    --card: #FFFFFF;
+    --orange: #E67E22;
+    --orange-dark: #C8641B;
+    --orange-light: #F5A94E;
+    --text: #4A3728;
+    --text-soft: #8A7360;
+    --success: #2E9E5B;
+    --success-bg: #E4F6EC;
+    --error: #E0553F;
+    --error-bg: #FCEAE7;
+    --shadow: 0 10px 30px rgba(198, 118, 44, 0.15);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: radial-gradient(circle at 15% 10%, #FBEAD3 0%, var(--cream) 45%),
+                radial-gradient(circle at 85% 90%, #F6DDBB 0%, var(--cream) 50%);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+
+  .app {
+    width: 100%;
+    max-width: 560px;
+  }
+
+  /* ---------- Header / brand ---------- */
+  .brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+  .brand-badge {
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--orange-light), var(--orange-dark));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800;
+    color: white;
+    font-size: 18px;
+    box-shadow: var(--shadow);
+  }
+  .brand-name {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--orange-dark);
+    letter-spacing: 0.3px;
+  }
+  .brand-name span { display:block; font-size: 11px; font-weight: 600; color: var(--text-soft); }
+
+  /* ---------- Card ---------- */
+  .card {
+    background: var(--card);
+    border-radius: 24px;
+    box-shadow: var(--shadow);
+    padding: 30px 28px 26px;
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: "";
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, var(--orange-light), var(--orange), var(--orange-dark));
+  }
+
+  /* ---------- Intro screen ---------- */
+  #intro h1 {
+    font-family: 'Baloo 2', sans-serif;
+    font-size: 26px;
+    color: var(--orange-dark);
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+  #intro p.lead {
+    color: var(--text-soft);
+    font-size: 15px;
+    margin-bottom: 20px;
+  }
+  .rules {
+    background: var(--cream);
+    border-radius: 16px;
+    padding: 16px 18px;
+    margin-bottom: 22px;
+  }
+  .rules li {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    padding: 6px 0;
+    color: var(--text);
+  }
+  .rules li .ico { font-size: 17px; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+    padding: 15px 20px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+    color: white;
+    box-shadow: 0 6px 16px rgba(198, 100, 27, 0.35);
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(198, 100, 27, 0.4); }
+  .btn:active { transform: translateY(0px) scale(0.98); }
+  .btn:disabled { opacity: .5; cursor: not-allowed; transform:none; }
+  .btn.ghost {
+    background: transparent;
+    color: var(--orange-dark);
+    box-shadow: none;
+    border: 2px solid var(--orange-light);
+  }
+
+  /* ---------- Quiz screen ---------- */
+  #quiz { display: none; }
+
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+  }
+  .stat {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--orange-dark);
+    background: var(--cream);
+    padding: 6px 12px;
+    border-radius: 20px;
+  }
+  .streak-flame { transition: transform .2s ease; }
+  .streak-flame.pop { animation: pop .35s ease; }
+  @keyframes pop { 0%{transform:scale(1);} 40%{transform:scale(1.4);} 100%{transform:scale(1);} }
+
+  .progress-track {
+    width: 100%;
+    height: 10px;
+    background: var(--cream-dark);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 22px;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--orange-light), var(--orange));
+    border-radius: 6px;
+    transition: width .4s ease;
+  }
+
+  .q-count {
+    font-size: 13px;
+    color: var(--text-soft);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .q-text {
+    font-family: 'Baloo 2', sans-serif;
+    font-size: 20px;
+    line-height: 1.4;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+  .q-text .blank {
+    display: inline-block;
+    min-width: 46px;
+    border-bottom: 3px solid var(--orange-light);
+  }
+
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .option {
+    text-align: left;
+    padding: 14px 16px;
+    border-radius: 14px;
+    border: 2px solid var(--cream-dark);
+    background: var(--cream);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--text);
+    cursor: pointer;
+    transition: all .15s ease;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .option .letter {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: white;
+    border: 2px solid var(--orange-light);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+    font-family: 'Baloo 2', sans-serif;
+    flex-shrink: 0;
+    color: var(--orange-dark);
+  }
+  .option:hover:not(:disabled) { border-color: var(--orange-light); transform: translateX(3px); }
+  .option:disabled { cursor: default; }
+  .option.correct { background: var(--success-bg); border-color: var(--success); color: var(--success); }
+  .option.correct .letter { background: var(--success); border-color: var(--success); color: white; }
+  .option.wrong { background: var(--error-bg); border-color: var(--error); color: var(--error); }
+  .option.wrong .letter { background: var(--error); border-color: var(--error); color: white; }
+  .option.dim { opacity: .45; }
+
+  .feedback {
+    display: none;
+    border-radius: 14px;
+    padding: 14px 16px;
+    margin-bottom: 16px;
+    font-size: 14px;
+    line-height: 1.5;
+    animation: slideIn .3s ease;
+  }
+  @keyframes slideIn { from { opacity:0; transform: translateY(-6px);} to {opacity:1; transform: translateY(0);} }
+  .feedback.correct { background: var(--success-bg); color: #1F7A45; }
+  .feedback.wrong { background: var(--error-bg); color: #B7402C; }
+  .feedback strong { font-family: 'Baloo 2', sans-serif; display: block; margin-bottom: 4px; font-size: 15px;}
+
+  .bonus-tag {
+    display: none;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--orange-dark);
+    background: #FFF1DC;
+    border-radius: 20px;
+    padding: 5px 12px;
+    margin-bottom: 14px;
+    width: fit-content;
+    animation: pop .4s ease;
+  }
+
+  /* ---------- Result screen ---------- */
+  #result { display: none; text-align: center; }
+  #result .medal {
+    font-size: 56px;
+    margin-bottom: 6px;
+  }
+  #result h2 {
+    font-family: 'Baloo 2', sans-serif;
+    font-size: 24px;
+    color: var(--orange-dark);
+    margin-bottom: 4px;
+  }
+  #result .msg {
+    color: var(--text-soft);
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+  .result-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 22px;
+  }
+  .result-box {
+    background: var(--cream);
+    border-radius: 14px;
+    padding: 14px 8px;
+  }
+  .result-box .num {
+    font-family: 'Baloo 2', sans-serif;
+    font-size: 22px;
+    color: var(--orange-dark);
+    font-weight: 800;
+  }
+  .result-box .lbl {
+    font-size: 11px;
+    color: var(--text-soft);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+  .footer-credit {
+    text-align: center;
+    margin-top: 18px;
+    font-size: 12px;
+    color: var(--text-soft);
+  }
+  .footer-credit b { color: var(--orange-dark); }
+
+  canvas#confetti-canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 999;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="confetti-canvas"></canvas>
+
+<div class="app">
+  <div class="brand">
+    <div class="brand-badge">TJ</div>
+    <div class="brand-name">Teacher Juliana <span>@teacher.julianadantas</span></div>
+  </div>
+
+  <div class="card">
+
+    <!-- INTRO -->
+    <div id="intro">
+      <h1>Present Perfect Challenge 🎯</h1>
+      <p class="lead">15 perguntas para testar o quanto você domina o Present Perfect. Feedback na hora, pontos por acerto e bônus por sequência!</p>
+      <ul class="rules">
+        <li><span class="ico">✅</span> +10 pontos por resposta certa</li>
+        <li><span class="ico">🔥</span> Bônus de streak a partir de 3 acertos seguidos</li>
+        <li><span class="ico">💡</span> Explicação em português depois de cada resposta</li>
+        <li><span class="ico">🏆</span> Resultado final com sua performance</li>
+      </ul>
+      <button class="btn" onclick="startQuiz()">Começar o desafio →</button>
+    </div>
+
+    <!-- QUIZ -->
+    <div id="quiz">
+      <div class="topbar">
+        <div class="stat">⭐ <span id="score-display">0</span> pts</div>
+        <div class="stat"><span class="streak-flame" id="flame">🔥</span> <span id="streak-display">0</span></div>
+      </div>
+      <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+      <div class="q-count" id="q-count">Pergunta 1 de 15</div>
+      <div class="q-text" id="q-text"></div>
+      <div class="options" id="options"></div>
+      <div class="bonus-tag" id="bonus-tag">🔥 Streak bonus +5!</div>
+      <div class="feedback" id="feedback"></div>
+      <button class="btn" id="next-btn" style="display:none" onclick="nextQuestion()">Próxima pergunta →</button>
+    </div>
+
+    <!-- RESULT -->
+    <div id="result">
+      <div class="medal" id="result-medal">🏆</div>
+      <h2 id="result-title">Muito bem!</h2>
+      <p class="msg" id="result-msg"></p>
+      <div class="result-grid">
+        <div class="result-box"><div class="num" id="final-score">0</div><div class="lbl">Pontos</div></div>
+        <div class="result-box"><div class="num" id="final-correct">0/15</div><div class="lbl">Acertos</div></div>
+        <div class="result-box"><div class="num" id="final-streak">0</div><div class="lbl">Melhor streak</div></div>
+      </div>
+      <button class="btn" onclick="restartQuiz()">🔁 Tentar novamente</button>
+    </div>
+
+  </div>
+  <div class="footer-credit">Feito com 💛 por <b>Teacher Juliana</b></div>
+</div>
+
+<script>
+const questions = [
+  {
+    text: 'She <span class="blank">___</span> her homework already.',
+    options: ['finish', 'finished', 'has finished', 'have finished'],
+    correct: 2,
+    explanation: "Present Perfect = HAVE/HAS + particípio passado. Como 'she' é 3ª pessoa do singular, usamos HAS. 'Finished' é o particípio passado de 'finish'."
+  },
+  {
+    text: 'I <span class="blank">___</span> that movie three times.',
+    options: ['have seen', 'has seen', 'saw', 'seeing'],
+    correct: 0,
+    explanation: "Com 'I' usamos HAVE. O particípio passado de 'see' é 'seen' (verbo irregular: see - saw - seen)."
+  },
+  {
+    text: 'They <span class="blank">___</span> yet.',
+    options: ["haven't arrived", "hasn't arrived", "don't arrive", "didn't arrive"],
+    correct: 0,
+    explanation: "Negativa no Present Perfect = HAVEN'T/HASN'T + particípio passado. 'They' pede HAVEN'T."
+  },
+  {
+    text: '<span class="blank">___</span> you ever <span class="blank">___</span> to London?',
+    options: ['Do / be', 'Have / been', 'Are / being', 'Did / be'],
+    correct: 1,
+    explanation: "Perguntas no Present Perfect seguem: HAVE/HAS + sujeito + particípio passado. O particípio de 'be' é 'been'."
+  },
+  {
+    text: 'He has <span class="blank">___</span> finished his project.',
+    options: ['just', 'yet', 'since', 'for'],
+    correct: 0,
+    explanation: "'JUST' indica uma ação muito recente. Normalmente fica entre HAVE/HAS e o particípio passado."
+  },
+  {
+    text: "We have <span class=\"blank\">___</span> eaten lunch, so we're not hungry.",
+    options: ['since', 'already', 'yet', 'for'],
+    correct: 1,
+    explanation: "'ALREADY' = 'já'. Usado em frases afirmativas para enfatizar que algo aconteceu antes do esperado."
+  },
+  {
+    text: "I haven't finished the report <span class=\"blank\">___</span>.",
+    options: ['already', 'just', 'yet', 'ever'],
+    correct: 2,
+    explanation: "'YET' = 'ainda' (em negativas) ou 'já' (em perguntas). Sempre aparece no final da frase."
+  },
+  {
+    text: 'Have you <span class="blank">___</span> visited Brazil?',
+    options: ['ever', 'never', 'yet', 'already'],
+    correct: 0,
+    explanation: "'EVER' = 'alguma vez'. É usado em perguntas no Present Perfect."
+  },
+  {
+    text: 'She has <span class="blank">___</span> traveled outside her country.',
+    options: ['ever', 'never', 'yet', 'since'],
+    correct: 1,
+    explanation: "'NEVER' = 'nunca'. Já tem sentido negativo, por isso o verbo fica afirmativo: 'has never traveled' (nunca 'hasn't never')."
+  },
+  {
+    text: 'I have lived in this city <span class="blank">___</span> 2015.',
+    options: ['for', 'since', 'ago', 'during'],
+    correct: 1,
+    explanation: "'SINCE' + ponto específico no tempo (um ano, uma data, um evento). Já 'FOR' é usado com duração."
+  },
+  {
+    text: 'They have known each other <span class="blank">___</span> ten years.',
+    options: ['since', 'for', 'ago', 'at'],
+    correct: 1,
+    explanation: "'FOR' + período de tempo/duração: for ten years, for two months, for a while."
+  },
+  {
+    text: 'Yesterday, I <span class="blank">___</span> a great movie.',
+    options: ['have watched', 'watched', 'has watched', 'watch'],
+    correct: 1,
+    explanation: "Com expressões de tempo específicas e finalizadas no passado (yesterday, last week, in 2020), usamos o SIMPLE PAST, não o Present Perfect."
+  },
+  {
+    text: "She has <span class=\"blank\">___</span> to Portugal — she's not here right now.",
+    options: ['gone', 'went', 'go', 'going'],
+    correct: 0,
+    explanation: "'GONE' significa que a pessoa foi e ainda está lá (não voltou). 'BEEN' significa que a pessoa foi e já retornou."
+  },
+  {
+    text: 'We have <span class="blank">___</span> sushi before.',
+    options: ['ate', 'eaten', 'eat', 'eating'],
+    correct: 1,
+    explanation: "O particípio passado de 'eat' é irregular: eat - ate - eaten."
+  },
+  {
+    text: 'I have <span class="blank">___</span> finished my English course.',
+    options: ['recently', 'yesterday', 'ago', 'tomorrow'],
+    correct: 0,
+    explanation: "'RECENTLY' (recentemente) é comum com o Present Perfect para indicar que algo aconteceu há pouco tempo, sem dizer exatamente quando."
+  }
+];
+
+let current = 0;
+let score = 0;
+let streak = 0;
+let maxStreak = 0;
+let correctCount = 0;
+let answered = false;
+
+function startQuiz() {
+  document.getElementById('intro').style.display = 'none';
+  document.getElementById('quiz').style.display = 'block';
+  renderQuestion();
+}
+
+function renderQuestion() {
+  answered = false;
+  const q = questions[current];
+  document.getElementById('q-count').textContent = `Pergunta ${current + 1} de ${questions.length}`;
+  document.getElementById('q-text').innerHTML = q.text;
+  document.getElementById('progress-fill').style.width = `${(current / questions.length) * 100}%`;
+  document.getElementById('score-display').textContent = score;
+  document.getElementById('streak-display').textContent = streak;
+  document.getElementById('feedback').style.display = 'none';
+  document.getElementById('bonus-tag').style.display = 'none';
+  document.getElementById('next-btn').style.display = 'none';
+
+  const letters = ['A', 'B', 'C', 'D'];
+  const optionsDiv = document.getElementById('options');
+  optionsDiv.innerHTML = '';
+  q.options.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'option';
+    btn.innerHTML = `<span class="letter">${letters[i]}</span><span>${opt}</span>`;
+    btn.onclick = () => selectAnswer(i);
+    optionsDiv.appendChild(btn);
+  });
+}
+
+function selectAnswer(index) {
+  if (answered) return;
+  answered = true;
+  const q = questions[current];
+  const optionButtons = document.querySelectorAll('.option');
+  const isCorrect = index === q.correct;
+
+  optionButtons.forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === q.correct) btn.classList.add('correct');
+    else if (i === index) btn.classList.add('wrong');
+    else btn.classList.add('dim');
+  });
+
+  const feedback = document.getElementById('feedback');
+  feedback.style.display = 'block';
+
+  if (isCorrect) {
+    score += 10;
+    streak += 1;
+    correctCount += 1;
+    if (streak > maxStreak) maxStreak = streak;
+    feedback.className = 'feedback correct';
+    feedback.innerHTML = `<strong>✅ Certíssimo!</strong>${q.explanation}`;
+    launchConfetti(30);
+
+    if (streak >= 3) {
+      score += 5;
+      const bonus = document.getElementById('bonus-tag');
+      bonus.style.display = 'flex';
+      bonus.textContent = `🔥 Streak bonus +5! (${streak} seguidas)`;
+      const flame = document.getElementById('flame');
+      flame.classList.remove('pop');
+      void flame.offsetWidth;
+      flame.classList.add('pop');
+    }
+  } else {
+    streak = 0;
+    feedback.className = 'feedback wrong';
+    feedback.innerHTML = `<strong>❌ Quase lá!</strong>${q.explanation}`;
+  }
+
+  document.getElementById('score-display').textContent = score;
+  document.getElementById('streak-display').textContent = streak;
+  document.getElementById('next-btn').style.display = 'block';
+  document.getElementById('next-btn').textContent = current === questions.length - 1 ? 'Ver resultado 🏁' : 'Próxima pergunta →';
+}
+
+function nextQuestion() {
+  current += 1;
+  if (current >= questions.length) {
+    showResult();
+  } else {
+    renderQuestion();
+  }
+}
+
+function showResult() {
+  document.getElementById('quiz').style.display = 'none';
+  document.getElementById('result').style.display = 'block';
+  document.getElementById('progress-fill').style.width = '100%';
+
+  const total = questions.length;
+  const pct = Math.round((correctCount / total) * 100);
+
+  document.getElementById('final-score').textContent = score;
+  document.getElementById('final-correct').textContent = `${correctCount}/${total}`;
+  document.getElementById('final-streak').textContent = maxStreak;
+
+  let medal, title, msg;
+  if (pct >= 90) {
+    medal = '🏆'; title = 'Nota máxima!';
+    msg = 'Você domina o Present Perfect! Já pode ensinar seus colegas de turma 😉';
+  } else if (pct >= 70) {
+    medal = '🥇'; title = 'Muito bem!';
+    msg = 'Ótimo domínio do conteúdo. Revise as explicações das questões que errou e você fecha o próximo quiz com 100%!';
+  } else if (pct >= 50) {
+    medal = '🥈'; title = 'No caminho certo!';
+    msg = 'Você já entende a estrutura, mas vale revisar os usos de already, yet, since e for.';
+  } else {
+    medal = '🥉'; title = 'Continue praticando!';
+    msg = 'Present Perfect exige prática. Releia as explicações e tente novamente — você vai melhorar rápido!';
+  }
+
+  document.getElementById('result-medal').textContent = medal;
+  document.getElementById('result-title').textContent = title;
+  document.getElementById('result-msg').textContent = msg;
+
+  launchConfetti(pct >= 70 ? 150 : 60);
+}
+
+function restartQuiz() {
+  current = 0; score = 0; streak = 0; maxStreak = 0; correctCount = 0;
+  document.getElementById('result').style.display = 'none';
+  document.getElementById('intro').style.display = 'block';
+}
+
+/* ---------- Lightweight confetti (self-contained, no libraries) ---------- */
+const canvas = document.getElementById('confetti-canvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
+let animId = null;
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+const confettiColors = ['#E67E22', '#F5A94E', '#2E9E5B', '#F1C40F', '#E0553F'];
+
+function launchConfetti(count) {
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced) return;
+
+  for (let i = 0; i < count; i++) {
+    particles.push({
+      x: Math.random() * canvas.width,
+      y: -20,
+      vx: (Math.random() - 0.5) * 4,
+      vy: Math.random() * 3 + 2,
+      size: Math.random() * 6 + 4,
+      color: confettiColors[Math.floor(Math.random() * confettiColors.length)],
+      rotation: Math.random() * 360,
+      rotSpeed: (Math.random() - 0.5) * 10,
+      life: 0
+    });
+  }
+  if (!animId) animate();
+}
+
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.forEach(p => {
+    p.x += p.vx;
+    p.y += p.vy;
+    p.vy += 0.05;
+    p.rotation += p.rotSpeed;
+    p.life += 1;
+
+    ctx.save();
+    ctx.translate(p.x, p.y);
+    ctx.rotate((p.rotation * Math.PI) / 180);
+    ctx.fillStyle = p.color;
+    ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.6);
+    ctx.restore();
+  });
+
+  particles = particles.filter(p => p.y < canvas.height + 30 && p.life < 400);
+
+  if (particles.length > 0) {
+    animId = requestAnimationFrame(animate);
+  } else {
+    animId = null;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+}
+</script>
+
+</body>
+</html>
