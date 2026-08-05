@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simple Present: Do & Does | Teacher Juliana Dantas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sand:#F2E7D0;
+    --sand-deep:#E6D5AE;
+    --paper:#FBF6EA;
+    --terracotta:#BC5A34;
+    --terracotta-deep:#9A4527;
+    --petrol:#1F4A52;
+    --petrol-deep:#153338;
+    --ochre:#D6A344;
+    --moss:#6C7A4C;
+    --moss-deep:#535E3A;
+    --wine:#7C2F2C;
+    --ink:#3B2A1E;
+    --ink-soft:#6B5642;
+    --shadow: 0 12px 32px rgba(59,42,30,0.18);
+  }
+
+  *{box-sizing:border-box;}
+
+  html,body{
+    margin:0;
+    padding:0;
+    min-height:100vh;
+    background:
+      radial-gradient(circle at 12% 8%, rgba(214,163,68,0.20), transparent 40%),
+      radial-gradient(circle at 90% 85%, rgba(108,122,76,0.18), transparent 45%),
+      var(--sand);
+    font-family:'Inter',sans-serif;
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .wrap{
+    max-width:560px;
+    margin:0 auto;
+    padding:28px 18px 90px;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+  }
+
+  /* ---------- Header / sun mark ---------- */
+  .brand-row{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:6px;
+  }
+
+  .sun-mark{ flex-shrink:0; }
+
+  .brand-text{
+    font-family:'Fraunces',serif;
+    font-weight:700;
+    font-size:15px;
+    color:var(--petrol-deep);
+    letter-spacing:0.02em;
+  }
+  .brand-text span{
+    display:block;
+    font-family:'Inter',sans-serif;
+    font-weight:600;
+    font-size:11px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--terracotta-deep);
+    margin-top:2px;
+  }
+
+  .zigzag{
+    height:10px;
+    width:100%;
+    margin:18px 0 22px;
+    background-image: linear-gradient(135deg, var(--terracotta) 25%, transparent 25%), linear-gradient(225deg, var(--terracotta) 25%, transparent 25%);
+    background-position: 0 0;
+    background-size: 14px 14px;
+    background-repeat: repeat-x;
+    opacity:0.55;
+  }
+
+  /* ---------- Card ---------- */
+  .card{
+    background:var(--paper);
+    border-radius:22px;
+    box-shadow:var(--shadow);
+    padding:30px 26px;
+    position:relative;
+    border:1px solid rgba(59,42,30,0.06);
+    animation: fadeUp .5s ease both;
+  }
+
+  @keyframes fadeUp{
+    from{opacity:0; transform:translateY(10px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+
+  /* ---------- Start screen ---------- */
+  #start-screen h1{
+    font-family:'Fraunces',serif;
+    font-weight:900;
+    font-size:32px;
+    line-height:1.12;
+    margin:6px 0 10px;
+    color:var(--petrol-deep);
+  }
+  #start-screen h1 em{
+    font-style:normal;
+    color:var(--terracotta);
+  }
+
+  .subtitle{
+    font-size:15px;
+    color:var(--ink-soft);
+    line-height:1.55;
+    margin-bottom:22px;
+  }
+
+  .pill-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:22px;
+  }
+  .pill{
+    font-size:12.5px;
+    font-weight:600;
+    padding:7px 13px;
+    border-radius:100px;
+    background:var(--sand-deep);
+    color:var(--petrol-deep);
+  }
+  .pill.alt{ background:rgba(188,90,52,0.14); color:var(--terracotta-deep); }
+  .pill.alt2{ background:rgba(108,122,76,0.16); color:var(--moss-deep); }
+
+  .rules-box{
+    background:var(--sand);
+    border-radius:14px;
+    padding:16px 18px;
+    margin-bottom:24px;
+    font-size:13.5px;
+    line-height:1.65;
+    color:var(--ink-soft);
+  }
+  .rules-box strong{ color:var(--ink); }
+
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    width:100%;
+    padding:16px 20px;
+    border:none;
+    border-radius:14px;
+    font-family:'Inter',sans-serif;
+    font-weight:700;
+    font-size:16px;
+    cursor:pointer;
+    transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+  }
+  .btn-primary{
+    background:var(--terracotta);
+    color:#fff;
+    box-shadow:0 8px 20px rgba(188,90,52,0.35);
+  }
+  .btn-primary:hover{ background:var(--terracotta-deep); transform:translateY(-2px); }
+  .btn-primary:active{ transform:translateY(0); }
+
+  .btn-ghost{
+    background:transparent;
+    color:var(--petrol-deep);
+    border:2px solid var(--petrol-deep);
+    margin-top:12px;
+  }
+  .btn-ghost:hover{ background:var(--petrol-deep); color:#fff; }
+
+  /* ---------- Quiz screen ---------- */
+  #quiz-screen{ display:none; }
+
+  .status-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:14px;
+    font-size:13px;
+    font-weight:700;
+    color:var(--petrol-deep);
+  }
+  .status-item{ display:flex; align-items:center; gap:6px; }
+  .streak-fire{ color:var(--terracotta); }
+
+  .progress-track{
+    width:100%;
+    height:9px;
+    background:var(--sand-deep);
+    border-radius:100px;
+    overflow:hidden;
+    margin-bottom:22px;
+  }
+  .progress-fill{
+    height:100%;
+    background:linear-gradient(90deg, var(--ochre), var(--terracotta));
+    border-radius:100px;
+    transition:width .4s ease;
+    width:0%;
+  }
+
+  .q-type{
+    display:inline-block;
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:0.09em;
+    text-transform:uppercase;
+    padding:5px 11px;
+    border-radius:100px;
+    margin-bottom:14px;
+  }
+  .q-type.afirmativa{ background:rgba(108,122,76,0.18); color:var(--moss-deep); }
+  .q-type.negativa{ background:rgba(124,47,44,0.14); color:var(--wine); }
+  .q-type.interrogativa{ background:rgba(31,74,82,0.14); color:var(--petrol-deep); }
+
+  .q-text{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:22px;
+    line-height:1.4;
+    color:var(--ink);
+    margin-bottom:22px;
+  }
+  .q-text b{ color:var(--terracotta-deep); }
+
+  .options{
+    display:flex;
+    flex-direction:column;
+    gap:11px;
+    margin-bottom:8px;
+  }
+
+  .option{
+    text-align:left;
+    padding:15px 16px;
+    border-radius:13px;
+    border:2px solid var(--sand-deep);
+    background:#fff;
+    font-family:'Inter',sans-serif;
+    font-size:16px;
+    font-weight:600;
+    color:var(--ink);
+    cursor:pointer;
+    transition:border-color .15s ease, transform .1s ease, background .15s ease;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .option .opt-letter{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:26px;
+    height:26px;
+    border-radius:8px;
+    background:var(--sand);
+    font-size:12.5px;
+    font-weight:800;
+    color:var(--petrol-deep);
+    flex-shrink:0;
+  }
+  .option:hover:not(.locked){ border-color:var(--ochre); transform:translateY(-1px); }
+  .option:active:not(.locked){ transform:translateY(0); }
+
+  .option.correct{
+    border-color:var(--moss);
+    background:rgba(108,122,76,0.14);
+  }
+  .option.correct .opt-letter{ background:var(--moss); color:#fff; }
+  .option.wrong{
+    border-color:var(--wine);
+    background:rgba(124,47,44,0.09);
+  }
+  .option.wrong .opt-letter{ background:var(--wine); color:#fff; }
+  .option.locked{ cursor:default; }
+  .option.dim{ opacity:0.55; }
+
+  .feedback{
+    display:none;
+    margin-top:16px;
+    padding:16px 18px;
+    border-radius:14px;
+    font-size:14px;
+    line-height:1.6;
+    animation: fadeUp .3s ease both;
+  }
+  .feedback.show{ display:block; }
+  .feedback.ok{ background:rgba(108,122,76,0.14); border-left:4px solid var(--moss); }
+  .feedback.no{ background:rgba(124,47,44,0.10); border-left:4px solid var(--wine); }
+  .feedback-title{
+    font-weight:800;
+    font-size:13.5px;
+    margin-bottom:6px;
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+  .feedback-title.ok{ color:var(--moss-deep); }
+  .feedback-title.no{ color:var(--wine); }
+  .feedback p{ margin:0 0 8px; color:var(--ink-soft); }
+  .feedback .tip{
+    margin:0;
+    font-weight:600;
+    color:var(--ink);
+    font-size:13.5px;
+  }
+  .feedback .tip span{ color:var(--terracotta-deep); }
+
+  .bonus-toast{
+    display:none;
+    margin-top:10px;
+    padding:9px 14px;
+    background:var(--ochre);
+    color:#3B2A0E;
+    border-radius:10px;
+    font-size:13px;
+    font-weight:800;
+    text-align:center;
+    animation: pop .35s ease both;
+  }
+  .bonus-toast.show{ display:block; }
+  @keyframes pop{
+    0%{ transform:scale(0.85); opacity:0; }
+    100%{ transform:scale(1); opacity:1; }
+  }
+
+  #next-btn{ margin-top:18px; display:none; }
+
+  /* ---------- Result screen ---------- */
+  #result-screen{ display:none; text-align:center; }
+
+  .result-emoji{ font-size:54px; margin-bottom:6px; }
+  .result-tier{
+    font-family:'Fraunces',serif;
+    font-weight:800;
+    font-size:26px;
+    color:var(--petrol-deep);
+    margin-bottom:6px;
+  }
+  .result-sub{ font-size:14px; color:var(--ink-soft); margin-bottom:24px; }
+
+  .score-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin-bottom:24px;
+  }
+  .score-box{
+    background:var(--sand);
+    border-radius:14px;
+    padding:16px 10px;
+  }
+  .score-box .num{
+    font-family:'Fraunces',serif;
+    font-weight:800;
+    font-size:26px;
+    color:var(--terracotta-deep);
+    display:block;
+  }
+  .score-box .lbl{
+    font-size:11.5px;
+    font-weight:700;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+  }
+
+  .result-bar-track{
+    width:100%;
+    height:14px;
+    background:var(--sand-deep);
+    border-radius:100px;
+    overflow:hidden;
+    margin-bottom:26px;
+  }
+  .result-bar-fill{
+    height:100%;
+    border-radius:100px;
+    background:linear-gradient(90deg, var(--moss), var(--ochre));
+    width:0%;
+    transition:width 1s ease .2s;
+  }
+
+  /* ---------- Footer ---------- */
+  .footer-credit{
+    margin-top:26px;
+    text-align:center;
+    font-size:12.5px;
+    color:var(--ink-soft);
+    line-height:1.7;
+  }
+  .footer-credit .heart{ color:var(--terracotta); }
+  .footer-credit .handle{
+    display:inline-block;
+    margin-top:4px;
+    font-weight:700;
+    color:var(--petrol-deep);
+  }
+
+  .sticky-foot{
+    position:fixed;
+    left:0; right:0; bottom:0;
+    background:var(--petrol-deep);
+    color:var(--sand);
+    text-align:center;
+    padding:9px 12px;
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:0.02em;
+  }
+  .sticky-foot .heart{ color:var(--ochre); }
+  .sticky-foot .handle{ color:#fff; font-weight:800; }
+
+  @media (max-width:400px){
+    .card{ padding:24px 18px; }
+    #start-screen h1{ font-size:27px; }
+    .q-text{ font-size:19px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="brand-row">
+    <svg class="sun-mark" width="34" height="34" viewBox="0 0 40 40" fill="none">
+      <circle cx="20" cy="20" r="9" fill="#D6A344"/>
+      <g stroke="#BC5A34" stroke-width="2.6" stroke-linecap="round">
+        <line x1="20" y1="1" x2="20" y2="7"/>
+        <line x1="20" y1="33" x2="20" y2="39"/>
+        <line x1="1" y1="20" x2="7" y2="20"/>
+        <line x1="33" y1="20" x2="39" y2="20"/>
+        <line x1="6.5" y1="6.5" x2="10.8" y2="10.8"/>
+        <line x1="29.2" y1="29.2" x2="33.5" y2="33.5"/>
+        <line x1="33.5" y1="6.5" x2="29.2" y2="10.8"/>
+        <line x1="10.8" y1="29.2" x2="6.5" y2="33.5"/>
+      </g>
+    </svg>
+    <div class="brand-text">Teacher Juliana Dantas
+      <span>English &middot; Simple Present</span>
+    </div>
+  </div>
+  <div class="zigzag"></div>
+
+  <!-- START SCREEN -->
+  <div class="card" id="start-screen">
+    <h1>Simple Present:<br><em>Do</em> & <em>Does</em></h1>
+    <p class="subtitle">Um quiz gamificado para dominar de vez o uso de <b>DO</b> e <b>DOES</b> como verbos auxiliares — nas frases afirmativas, negativas e nas perguntas.</p>
+
+    <div class="pill-row">
+      <span class="pill">Nível A1–A2</span>
+      <span class="pill alt">20 perguntas</span>
+      <span class="pill alt2">Feedback instantâneo</span>
+    </div>
+
+    <div class="rules-box">
+      <strong>Como funciona:</strong> a cada acerto você ganha 10 pontos. Acerte 3 seguidas e ganhe um bônus de sequência 🔥. Depois de cada resposta você recebe a explicação da regra e uma dica para não errar de novo. Vamos lá?
+    </div>
+
+    <button class="btn btn-primary" onclick="startQuiz()">Começar o quiz →</button>
+
+    <div class="footer-credit">
+      Feito com amor <span class="heart">❤️</span> por Teacher Juliana Dantas<br>
+      <span class="handle">@teacher.julianadantas</span>
+    </div>
+  </div>
+
+  <!-- QUIZ SCREEN -->
+  <div class="card" id="quiz-screen">
+    <div class="status-row">
+      <div class="status-item">📍 <span id="q-counter">1</span>/20</div>
+      <div class="status-item">⭐ <span id="score-display">0</span> pts</div>
+      <div class="status-item streak-fire">🔥 <span id="streak-display">0</span></div>
+    </div>
+
+    <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+
+    <span class="q-type" id="q-type-badge">Afirmativa</span>
+    <div class="q-text" id="q-text">Carregando...</div>
+
+    <div class="options" id="options-container"></div>
+
+    <div class="bonus-toast" id="bonus-toast">🔥 Sequência de acertos! +5 pontos bônus</div>
+
+    <div class="feedback" id="feedback-box">
+      <div class="feedback-title" id="feedback-title"></div>
+      <p id="feedback-text"></p>
+      <p class="tip" id="feedback-tip"></p>
+    </div>
+
+    <button class="btn btn-primary" id="next-btn" onclick="nextQuestion()">Próxima pergunta →</button>
+  </div>
+
+  <!-- RESULT SCREEN -->
+  <div class="card" id="result-screen">
+    <div class="result-emoji" id="result-emoji">🎉</div>
+    <div class="result-tier" id="result-tier">Muito bem!</div>
+    <div class="result-sub" id="result-sub">Você mandou bem no Simple Present.</div>
+
+    <div class="score-grid">
+      <div class="score-box">
+        <span class="num" id="final-score">0</span>
+        <span class="lbl">Pontos</span>
+      </div>
+      <div class="score-box">
+        <span class="num" id="final-correct">0/20</span>
+        <span class="lbl">Acertos</span>
+      </div>
+      <div class="score-box">
+        <span class="num" id="final-streak">0</span>
+        <span class="lbl">Melhor sequência</span>
+      </div>
+      <div class="score-box">
+        <span class="num" id="final-percent">0%</span>
+        <span class="lbl">Aproveitamento</span>
+      </div>
+    </div>
+
+    <div class="result-bar-track"><div class="result-bar-fill" id="result-bar-fill"></div></div>
+
+    <button class="btn btn-primary" onclick="restartQuiz()">Refazer o quiz</button>
+
+    <div class="footer-credit">
+      Feito com amor <span class="heart">❤️</span> por Teacher Juliana Dantas<br>
+      <span class="handle">@teacher.julianadantas</span>
+    </div>
+  </div>
+
+</div>
+
+<div class="sticky-foot">
+  <span class="heart">❤️</span> Teacher Juliana Dantas &nbsp;·&nbsp; <span class="handle">@teacher.julianadantas</span>
+</div>
+
+<script>
+const questions = [
+  {
+    type:"afirmativa",
+    text:'He <b>____</b> football every weekend.',
+    options:["play","plays","does play","do play"],
+    correct:1,
+    explanation:'"He" é 3ª pessoa do singular. No Simple Present afirmativo, o verbo recebe "-s" (play → plays). DO/DOES nunca aparecem em frases afirmativas.',
+    tip:"He / She / It → verbo + s (ou es) na afirmativa."
+  },
+  {
+    type:"afirmativa",
+    text:'I <b>____</b> coffee every morning.',
+    options:["drink","drinks","does drink","do drink"],
+    correct:0,
+    explanation:'Com "I" o verbo fica na forma base, sem "-s": I drink. Na afirmativa não usamos DO.',
+    tip:"I / You / We / They → verbo na forma base na afirmativa."
+  },
+  {
+    type:"negativa",
+    text:'She <b>____</b> like spicy food.',
+    options:["don't","doesn't","not","no"],
+    correct:1,
+    explanation:'"She" é 3ª pessoa do singular, então usamos DOESN\'T + verbo na forma base: doesn\'t like.',
+    tip:"DOESN'T = does not, usado com he / she / it."
+  },
+  {
+    type:"negativa",
+    text:'They <b>____</b> live in São Paulo.',
+    options:["doesn't","don't","not","isn't"],
+    correct:1,
+    explanation:'"They" pede DON\'T + verbo na forma base: don\'t live.',
+    tip:"DON'T = do not, usado com I / you / we / they."
+  },
+  {
+    type:"interrogativa",
+    text:'<b>____</b> you speak Spanish?',
+    options:["Do","Does","Are","Is"],
+    correct:0,
+    explanation:'Para perguntas com "you", a frase começa com DO: Do you speak...?',
+    tip:"Perguntas no Simple Present começam com DO ou DOES + sujeito + verbo base."
+  },
+  {
+    type:"interrogativa",
+    text:'<b>____</b> your sister work on Saturdays?',
+    options:["Do","Does","Is","Are"],
+    correct:1,
+    explanation:'"Your sister" equivale a "she" (3ª pessoa do singular), então usamos DOES: Does your sister work...?',
+    tip:"Sujeitos singulares (he/she/it) pedem DOES nas perguntas."
+  },
+  {
+    type:"afirmativa",
+    text:'We <b>____</b> English at school.',
+    options:["study","studies","does study","do study"],
+    correct:0,
+    explanation:'"We" usa o verbo na forma base: study. Não existe DO na afirmativa.',
+    tip:"Sujeitos no plural (we/you/they) não recebem \"-s\" no verbo."
+  },
+  {
+    type:"negativa",
+    text:'I <b>____</b> understand this exercise.',
+    options:["doesn't","don't","not","no"],
+    correct:1,
+    explanation:'Com "I" usamos DON\'T: I don\'t understand.',
+    tip:"DON'T acompanha I, you, we, they."
+  },
+  {
+    type:"interrogativa",
+    text:'<b>____</b> it rain a lot in this city?',
+    options:["Do","Does","Is","Are"],
+    correct:1,
+    explanation:'"It" é considerado 3ª pessoa do singular, então usamos DOES: Does it rain...?',
+    tip:"It (coisas, clima, animais) também usa DOES."
+  },
+  {
+    type:"afirmativa",
+    text:'My parents <b>____</b> in a small house.',
+    options:["live","lives","does live","do live"],
+    correct:0,
+    explanation:'"My parents" equivale a "they" (plural), o verbo fica na forma base: live.',
+    tip:"Sujeitos no plural não recebem \"-s\" no verbo, e não usam DO no afirmativo."
+  },
+  {
+    type:"negativa",
+    text:'He <b>____</b> eat meat.',
+    options:["don't","doesn't","not","no"],
+    correct:1,
+    explanation:'"He" pede DOESN\'T: He doesn\'t eat meat.',
+    tip:"DOESN'T = does not (he/she/it)."
+  },
+  {
+    type:"interrogativa",
+    text:'<b>____</b> we need a reservation?',
+    options:["Do","Does","Is","Are"],
+    correct:0,
+    explanation:'"We" usa DO nas perguntas: Do we need...?',
+    tip:"We, you, they → DO nas perguntas e negativas."
+  },
+  {
+    type:"afirmativa",
+    text:'The store <b>____</b> at 9 am.',
+    options:["open","opens","does open","do open"],
+    correct:1,
+    explanation:'"The store" equivale a "it" (3ª pessoa do singular), o verbo recebe "-s": opens.',
+    tip:"Substantivos singulares (coisas, lugares) seguem a regra de he/she/it."
+  },
+  {
+    type:"negativa",
+    text:'My friends <b>____</b> like horror movies.',
+    options:["doesn't","don't","not","no"],
+    correct:1,
+    explanation:'"My friends" equivale a "they", usa DON\'T: don\'t like.',
+    tip:"Sujeitos no plural sempre usam DON'T na negativa."
+  },
+  {
+    type:"interrogativa",
+    text:'<b>____</b> Peter and Maria live near you?',
+    options:["Do","Does","Is","Are"],
+    correct:0,
+    explanation:'"Peter and Maria" formam um sujeito plural (they), então usamos DO: Do Peter and Maria live...?',
+    tip:"Dois ou mais sujeitos juntos = plural = DO."
+  },
+  {
+    type:"afirmativa",
+    text:'The teacher <b>____</b> homework every class.',
+    options:["give","gives","does give","do give"],
+    correct:1,
+    explanation:'"The teacher" é singular (he/she), o verbo recebe "-s": gives.',
+    tip:"Uma pessoa/coisa no singular = verbo + s/es, sem DOES na afirmativa."
+  },
+  {
+    type:"negativa",
+    text:'It <b>____</b> snow in Paraíba.',
+    options:["don't","doesn't","not","no"],
+    correct:1,
+    explanation:'"It" é singular, usa DOESN\'T: it doesn\'t snow.',
+    tip:"It (clima, animais, objetos) = DOESN'T no negativo."
+  },
+  {
+    type:"afirmativa",
+    text:'I <b>____</b> my homework right after class. (aqui "do" é o verbo principal, significa "fazer")',
+    options:["do","does","doing","did"],
+    correct:0,
+    explanation:'Cuidado: aqui "do" não é auxiliar, é o verbo principal da frase, significando "fazer". Com "I" a forma correta é "do": I do my homework.',
+    tip:'DO também pode ser um verbo principal (fazer) — não apenas um auxiliar!'
+  },
+  {
+    type:"interrogativa",
+    text:'<b>____</b> your friends like pizza?',
+    options:["Do","Does","Is","Are"],
+    correct:0,
+    explanation:'"Your friends" equivale a "they", usa DO: Do your friends like...?',
+    tip:"Sujeitos no plural usam DO nas perguntas."
+  },
+  {
+    type:"interrogativa",
+    text:'<b>____</b> she have any brothers or sisters?',
+    options:["Do","Does","Is","Are"],
+    correct:1,
+    explanation:'"She" é singular, então a pergunta sempre começa com DOES: Does she have...?',
+    tip:"Perguntas com he/she/it sempre usam DOES."
+  }
+];
+
+let current = 0;
+let score = 0;
+let streak = 0;
+let maxStreak = 0;
+let correctCount = 0;
+let answered = false;
+
+function startQuiz(){
+  document.getElementById('start-screen').style.display = 'none';
+  document.getElementById('quiz-screen').style.display = 'block';
+  renderQuestion();
+}
+
+function renderQuestion(){
+  answered = false;
+  const q = questions[current];
+  document.getElementById('q-counter').textContent = current + 1;
+  document.getElementById('score-display').textContent = score;
+  document.getElementById('streak-display').textContent = streak;
+  document.getElementById('progress-fill').style.width = (current / questions.length * 100) + '%';
+
+  const badge = document.getElementById('q-type-badge');
+  badge.className = 'q-type ' + q.type;
+  badge.textContent = q.type.charAt(0).toUpperCase() + q.type.slice(1);
+
+  document.getElementById('q-text').innerHTML = q.text;
+
+  const optContainer = document.getElementById('options-container');
+  optContainer.innerHTML = '';
+  const letters = ['A','B','C','D'];
+  q.options.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'option';
+    btn.innerHTML = '<span class="opt-letter">' + letters[i] + '</span><span>' + opt + '</span>';
+    btn.onclick = () => selectOption(i);
+    optContainer.appendChild(btn);
+  });
+
+  document.getElementById('feedback-box').classList.remove('show');
+  document.getElementById('bonus-toast').classList.remove('show');
+  document.getElementById('next-btn').style.display = 'none';
+}
+
+function selectOption(i){
+  if (answered) return;
+  answered = true;
+
+  const q = questions[current];
+  const opts = document.querySelectorAll('.option');
+  const isCorrect = (i === q.correct);
+
+  opts.forEach((btn, idx) => {
+    btn.classList.add('locked');
+    if (idx !== i) btn.classList.add('dim');
+    if (idx === q.correct) btn.classList.add('correct');
+    if (idx === i && !isCorrect) btn.classList.add('wrong');
+  });
+
+  let bonus = 0;
+  if (isCorrect){
+    correctCount++;
+    streak++;
+    if (streak > maxStreak) maxStreak = streak;
+    score += 10;
+    if (streak > 0 && streak % 3 === 0){
+      bonus = 5;
+      score += bonus;
+      const toast = document.getElementById('bonus-toast');
+      toast.textContent = '🔥 Sequência de ' + streak + ' acertos! +' + bonus + ' pontos bônus';
+      toast.classList.add('show');
+    }
+  } else {
+    streak = 0;
+  }
+
+  document.getElementById('score-display').textContent = score;
+  document.getElementById('streak-display').textContent = streak;
+
+  const fb = document.getElementById('feedback-box');
+  const fbTitle = document.getElementById('feedback-title');
+  fb.classList.remove('ok','no');
+  fbTitle.classList.remove('ok','no');
+
+  if (isCorrect){
+    fb.classList.add('show','ok');
+    fbTitle.classList.add('ok');
+    fbTitle.textContent = '✅ Certíssimo!';
+  } else {
+    fb.classList.add('show','no');
+    fbTitle.classList.add('no');
+    fbTitle.textContent = '❌ Quase lá!';
+  }
+
+  document.getElementById('feedback-text').textContent = q.explanation;
+  document.getElementById('feedback-tip').innerHTML = '💡 <span>Dica:</span> ' + q.tip;
+
+  document.getElementById('next-btn').style.display = 'block';
+}
+
+function nextQuestion(){
+  current++;
+  if (current < questions.length){
+    renderQuestion();
+  } else {
+    showResults();
+  }
+}
+
+function showResults(){
+  document.getElementById('quiz-screen').style.display = 'none';
+  document.getElementById('result-screen').style.display = 'block';
+
+  const percent = Math.round((correctCount / questions.length) * 100);
+
+  document.getElementById('final-score').textContent = score;
+  document.getElementById('final-correct').textContent = correctCount + '/' + questions.length;
+  document.getElementById('final-streak').textContent = maxStreak;
+  document.getElementById('final-percent').textContent = percent + '%';
+
+  setTimeout(() => {
+    document.getElementById('result-bar-fill').style.width = percent + '%';
+  }, 100);
+
+  let emoji, tier, sub;
+  if (percent >= 90){
+    emoji = '🌞'; tier = 'Nível Nordestino de craque!';
+    sub = 'Você domina DO e DOES quase como fala português. Mandou muito bem!';
+  } else if (percent >= 70){
+    emoji = '🎉'; tier = 'Muito bem, quase lá!';
+    sub = 'Você já entende bem a regra. Revise as explicações das que errou e mande ver de novo.';
+  } else if (percent >= 50){
+    emoji = '💪'; tier = 'No caminho certo!';
+    sub = 'A base está formada. Releia as dicas de cada pergunta e treine mais um pouco.';
+  } else {
+    emoji = '📚'; tier = 'Bora praticar mais um pouco!';
+    sub = 'Sem problemas! Revise a regra do DO/DOES com a Teacher e tente de novo.';
+  }
+  document.getElementById('result-emoji').textContent = emoji;
+  document.getElementById('result-tier').textContent = tier;
+  document.getElementById('result-sub').textContent = sub;
+}
+
+function restartQuiz(){
+  current = 0;
+  score = 0;
+  streak = 0;
+  maxStreak = 0;
+  correctCount = 0;
+  document.getElementById('result-screen').style.display = 'none';
+  document.getElementById('start-screen').style.display = 'block';
+}
+</script>
+
+</body>
+</html>
